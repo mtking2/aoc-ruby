@@ -1,4 +1,4 @@
-# Avent of Code on Ruby
+# Advent of Code on Ruby
 
 [![Lint and Test](https://github.com/mtking2/aoc-ruby/actions/workflows/lint-and-test.yml/badge.svg)](https://github.com/mtking2/aoc-ruby/actions/workflows/lint-and-test.yml)
 
