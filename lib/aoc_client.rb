@@ -67,7 +67,7 @@ module AOCClient
 				File.read(cache_file)
 			else
 				content = yield
-				File.write(cache_file, content)
+				File.write(cache_file, content) if !content.nil?
 				content
 			end
 		end
