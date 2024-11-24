@@ -1,4 +1,4 @@
-# Avent of Code on Ruby
+# Advent of Code on Ruby
 
 ## Setup
 
