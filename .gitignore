@@ -9,6 +9,5 @@
 .DS_Store
 
 .ruby-lsp
-.cache
 
 spec/examples.txt
