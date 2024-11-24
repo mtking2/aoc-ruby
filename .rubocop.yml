@@ -1,0 +1,56 @@
+require:
+  - standard
+  - rubocop-rspec
+
+inherit_gem:
+  standard: config/base.yml
+
+AllCops:
+  NewCops: enable
+  Exclude:
+    - node_modules/**/*
+    - public/**/*
+    - vendor/**/*
+    - bin/**/*
+    - doc/**/*
+    - db/schema.rb
+    - ~/.rbenv/**/*
+
+RSpec/NoExpectationExample:
+  Exclude:
+    - spec/factories_spec.rb
+
+Layout/IndentationStyle:
+  EnforcedStyle: tabs
+
+Layout/SpaceInsideHashLiteralBraces:
+  EnforcedStyle: space
+
+Layout/EmptyLinesAroundClassBody:
+  EnforcedStyle: empty_lines
+
+Layout/EmptyLinesAroundModuleBody:
+  EnforcedStyle: empty_lines
+
+Style/NilComparison:
+  Enabled: false
+
+Layout/IndentationWidth:
+  Width: 1
+RSpec/VariableName:
+  EnforcedStyle: snake_case
+  AllowedPatterns:
+    - ^Authorization$
+
+RSpec/ExampleLength:
+  CountAsOne:
+    - method_call
+    - array
+    - hash
+    - heredoc
+
+Style/SafeNavigationChainLength:
+  Enabled: true
+
+Style/StringLiterals:
+  EnforcedStyle: double_quotes
