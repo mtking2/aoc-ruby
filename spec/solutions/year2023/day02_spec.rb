@@ -1,7 +1,7 @@
 require "rspec"
-require "solutions/year2023/day01"
+require "solutions/year2023/day02"
 
-RSpec.describe Solutions::Year2023::Day01 do
+RSpec.describe Solutions::Year2023::Day02 do
 	subject(:solution) { described_class.new }
 
 	let(:actual_input) { AOCClient.fetch_input(described_class::YEAR, described_class::DAY) }
@@ -12,7 +12,7 @@ RSpec.describe Solutions::Year2023::Day01 do
 		end
 
 		it "has the correct day" do
-			expect(described_class::DAY).to eq(1)
+			expect(described_class::DAY).to eq(2)
 		end
 	end
 
@@ -20,7 +20,7 @@ RSpec.describe Solutions::Year2023::Day01 do
 		context "with example input" do
 			it "returns the expected result" do
 				example_input_part_one = AOCClient.fetch_example(described_class::YEAR, described_class::DAY, 1)
-				expect(solution.part1(example_input_part_one)).to eq(142)
+				expect(solution.part1(example_input_part_one)).to eq(8)
 			end
 		end
 
@@ -36,7 +36,7 @@ RSpec.describe Solutions::Year2023::Day01 do
 		context "with example input" do
 			it "returns the expected result" do
 				example_input_part_two = AOCClient.fetch_example(described_class::YEAR, described_class::DAY, 2)
-				expect(solution.part2(example_input_part_two)).to eq(281)
+				expect(solution.part2(example_input_part_two)).to eq(2286)
 			end
 		end
 
