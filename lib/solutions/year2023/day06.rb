@@ -13,7 +13,6 @@ module Solutions
 				num_wins = 0
 				(0..time - 1).each do |i|
 					max_dist = i * (time - i)
-					# puts "#{i} - #{max_dist}"
 					num_wins += 1 if max_dist > rec
 				end
 				num_wins
@@ -33,7 +32,6 @@ module Solutions
 				data = parse_input(input)
 				time = data[:times].join.to_i
 				rec = data[:distances].join.to_i
-				# binding.b
 				get_wins(time, rec)
 			end
 
