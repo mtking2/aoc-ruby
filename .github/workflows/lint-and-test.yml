@@ -23,6 +23,7 @@ jobs:
 
   test:
     runs-on: ubuntu-latest
+    environment: test
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
@@ -35,3 +36,5 @@ jobs:
 
       - name: Run RSpec
         run: bundle exec rspec
+        env:
+          AOC_SESSION: ${{ secrets.AOC_SESSION }}
