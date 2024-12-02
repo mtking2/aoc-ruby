@@ -24,7 +24,6 @@ module Solutions
 
 				similarity_score = 0
 				right_list_counts = right_list.tally
-				# binding.b
 
 				left_list.each do |n|
 					similarity_score += n * (right_list_counts[n] || 0)
