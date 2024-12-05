@@ -11,7 +11,7 @@ module Solutions
 
 			# fine for small networks, but stack overflows on large networks
 			def traverse_network_recursively(network, node, inst_index)
-				puts "node: #{node}, inst_index: #{inst_index}"
+				# puts "node: #{node}, inst_index: #{inst_index}"
 				return inst_index if node == "ZZZ"
 
 				instruction = networkcurrent_context[inst_index % network["INS"].length]
@@ -43,7 +43,7 @@ module Solutions
 					next_index = (instruction == "L") ? 0 : 1
 					nodes = nodes.map { |n| network[n][next_index] }
 					step += 1
-					puts "nodes: #{nodes}, step: #{step}"
+					# puts "nodes: #{nodes}, step: #{step}"
 				end
 				step
 			end
@@ -79,7 +79,7 @@ module Solutions
 				network = parse_input(input)
 				starting_nodes = network.keys.select { |k| k.end_with?("A") }
 
-				puts "#{starting_nodes.length} starting_nodes: #{starting_nodes}"
+				# puts "#{starting_nodes.length} starting_nodes: #{starting_nodes}"
 
 				# traverse_network_part2_attempt1(network, starting_nodes)
 				traverse_network_part2_attempt2(network, starting_nodes)
