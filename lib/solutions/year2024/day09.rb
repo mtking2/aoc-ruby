@@ -10,7 +10,7 @@ module Solutions
 			DAY = 9
 
 			def defrag(block_fmt_data, mut: false)
-				puts "defragging..."
+				# puts "defragging..."
 				array = mut ? block_fmt_data : block_fmt_data.dup
 
 				0.upto(array.size - 1) do |i|
@@ -22,9 +22,9 @@ module Solutions
 							break
 						end
 					end
-					print "\r#{(((i + 1).to_f / array.size.to_f) * 100).round}%"
+					# print "\r#{(((i + 1).to_f / array.size.to_f) * 100).round}%"
 				end
-				print "\n"
+				# print "\n"
 				array
 			end
 
@@ -33,7 +33,7 @@ module Solutions
 			end
 
 			def calculate_checksum(block_fmt_data)
-				puts "calculating checksum..."
+				# puts "calculating checksum..."
 				checksum = []
 				block_fmt_data.each_with_index do |block, i|
 					next if block == "."
