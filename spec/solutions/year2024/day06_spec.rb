@@ -43,7 +43,10 @@ RSpec.describe Solutions::Year2024::Day06 do
 		context "with actual input" do
 			it "returns the correct answer" do
 				part2_answer = AOCClient.fetch_answer(described_class::YEAR, described_class::DAY, 2)
+
+				# skipping brute force solution call
 				# expect(solution.part2(actual_input)).to eq(part2_answer)
+
 				expect(part2_answer).to eq(1480)
 			end
 		end
