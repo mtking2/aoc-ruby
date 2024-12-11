@@ -9,65 +9,90 @@ module Solutions
 			YEAR = 2024
 			DAY = 9
 
-			def defrag(block_fmt_data, mut: false)
-				# puts "defragging..."
-				array = mut ? block_fmt_data : block_fmt_data.dup
+			def checksum(blocks)
+				checksum = 0
+				blocks.each_with_index do |block, index|
+					checksum += block * index unless block.nil?
+				end
+				checksum
+			end
 
-				0.upto(array.size - 1) do |i|
-					if array[i] == "."
-						(array.size - 1).downto(i + 1) do |j|
-							next if array[j] == "."
+			def compress(data)
+				blocks = data[:blocks]
+				left = 0
+				right = blocks.length - 1
 
-							array[i], array[j] = array[j], array[i]
-							break
-						end
+				while left < right
+					if !blocks[left].nil?
+						left += 1
+					elsif blocks[right].nil?
+						right -= 1
+					else
+						blocks[left] = blocks[right]
+						blocks[right] = nil
 					end
-					# print "\r#{(((i + 1).to_f / array.size.to_f) * 100).round}%"
 				end
-				# print "\n"
-				array
+
+				blocks
 			end
 
-			def defrag!(block_fmt_data)
-				defrag(block_fmt_data, mut: true)
-			end
+			def defrag(data)
+				blocks = data[:blocks]
+				file_sizes = data[:file_sizes]
+				file_index = data[:file_index]
 
-			def calculate_checksum(block_fmt_data)
-				# puts "calculating checksum..."
-				checksum = []
-				block_fmt_data.each_with_index do |block, i|
-					next if block == "."
+				start_search = Hash.new(0)
+				file_sizes.reverse_each do |file_id, size|
+					(start_search[size]...file_index[file_id]).each do |window_start|
+						next unless blocks[window_start...window_start + size].all?(&:nil?)
 
-					checksum << i * block
+						start_search[size] = window_start + size
+						(0...size).each do |offset|
+							blocks[window_start + offset] = file_id
+							blocks[file_index[file_id] + offset] = nil
+						end
+						break
+					end
 				end
-				checksum.sum
-			end
-
-			def full_block_fmt_data(input)
-				disc_map = parse_input(input)
-				block_fmt_data = []
-				disc_map.each_with_index do |data, id|
-					blocks, free_space = data
-					blocks&.times { block_fmt_data << id }
-					free_space&.times { block_fmt_data << "." }
-				end
-				block_fmt_data
+				blocks
 			end
 
 			def part1(input)
-				block_fmt_data = full_block_fmt_data(input)
-				defrag!(block_fmt_data)
-				calculate_checksum(block_fmt_data)
+				data = parse_input(input)
+				checksum(compress(data))
 			end
 
 			def part2(input)
-				# Your code here
+				data = parse_input(input)
+				checksum(defrag(data))
 			end
 
-			private
-
 			def parse_input(input)
-				input.chars.map(&:to_i).each_slice(2).to_a
+				blocks = []
+				file_sizes = {}
+				file_index = {}
+
+				file_id = 0
+				current_index = 0
+				file = true
+				input.chomp.chars.each do |char|
+					size = char.to_i
+					blocks += file ? [file_id] * size : [nil] * size
+
+					if file
+						file_sizes[file_id] = size
+						file_index[file_id] = current_index
+						file_id += 1
+					end
+
+					current_index += size
+					file = !file
+				end
+				{
+					blocks: blocks,
+					file_sizes: file_sizes,
+					file_index: file_index
+				}
 			end
 
 		end

@@ -16,68 +16,51 @@ RSpec.describe Solutions::Year2024::Day09 do
 		end
 	end
 
-	describe "#full_block_fmt_data" do
+	describe "#compress" do
 		context "with example input" do
-			let(:example_input) { "12345" }
+			let(:data) { solution.parse_input("12345") }
 
 			it "returns the expected result" do
-				expect(solution.full_block_fmt_data(example_input).join).to eq("0..111....22222")
-			end
-		end
-
-		context "with different example input" do
-			let(:example_input) { "2333133121414131402" }
-
-			it "returns the expected result" do
-				expect(solution.full_block_fmt_data(example_input).join).to eq("00...111...2...333.44.5555.6666.777.888899")
+				blocks_str = solution.compress(data).map { |b| b.nil? ? "." : b }.join
+				expect(blocks_str).to eq("022111222......")
 			end
 		end
 
 		context "with another example input" do
-			let(:example_input) { "233313312141413140256" }
+			let(:data) { solution.parse_input("2333133121414131402") }
 
 			it "returns the expected result" do
-				expect(solution.full_block_fmt_data(example_input).join).to eq("00...111...2...333.44.5555.6666.777.888899.....101010101010")
+				blocks_str = solution.compress(data).map { |b| b.nil? ? "." : b }.join
+				expect(blocks_str).to eq("0099811188827773336446555566..............")
+			end
+		end
+
+		context "with a different example input" do
+			let(:data) { solution.parse_input("233313312141413140256") }
+
+			it "returns the expected result" do
+				blocks_str = solution.compress(data).map { |b| b.nil? ? "." : b }.join
+				expect(blocks_str).to eq("0010101011110101029983338448555586666777...................")
 			end
 		end
 	end
 
 	describe "#defrag" do
 		context "with example input" do
-			let(:example_input) { solution.full_block_fmt_data("12345") }
+			let(:data) { solution.parse_input("2333133121414131402") }
 
 			it "returns the expected result" do
-				expect(solution.defrag(example_input).join).to eq("022111222......")
-			end
-
-			it "does not modify the input string" do
-				expect { solution.defrag(example_input) }.not_to change { example_input }
+				blocks_str = solution.defrag(data).map { |b| b.nil? ? "." : b }.join
+				expect(blocks_str).to eq("00992111777.44.333....5555.6666.....8888..")
 			end
 		end
 
-		context "with another example input" do
-			let(:example_input) { solution.full_block_fmt_data("2333133121414131402") }
+		context "with a different example input" do
+			let(:data) { solution.parse_input("233313312141413140256") }
 
 			it "returns the expected result" do
-				expect(solution.defrag(example_input).join).to eq("0099811188827773336446555566..............")
-			end
-		end
-
-		context "with a differnt example input" do
-			let(:example_input) { solution.full_block_fmt_data("233313312141413140256") }
-
-			it "returns the expected result" do
-				expect(solution.defrag(example_input).join).to eq("0010101011110101029983338448555586666777...................")
-			end
-		end
-	end
-
-	describe "#defrag!" do
-		context "with example input" do
-			let(:example_input) { "0..111....22222" }
-
-			it "modifies the input string in place" do
-				expect { solution.defrag!(example_input) }.to change { example_input }.from("0..111....22222").to("022111222......")
+				blocks_str = solution.defrag(data).map { |b| b.nil? ? "." : b }.join
+				expect(blocks_str).to eq("00992111777.44.333....5555.6666.....8888.......101010101010")
 			end
 		end
 	end
@@ -94,11 +77,7 @@ RSpec.describe Solutions::Year2024::Day09 do
 		context "with actual input" do
 			it "returns the correct answer" do
 				part1_answer = AOCClient.fetch_answer(described_class::YEAR, described_class::DAY, 1)
-
-				# skipping brute force solution call
-				# expect(solution.part1(actual_input)).to eq(part1_answer)
-
-				expect(part1_answer).to eq(6340197768906)
+				expect(solution.part1(actual_input)).to eq(part1_answer)
 			end
 		end
 	end
@@ -106,15 +85,13 @@ RSpec.describe Solutions::Year2024::Day09 do
 	describe "#part2" do
 		context "with example input" do
 			it "returns the expected result" do
-				skip("TODO")
-				example_input_part_two = AOCClient.fetch_example(described_class::YEAR, described_class::DAY, 2)
+				example_input_part_two = AOCClient.fetch_example(described_class::YEAR, described_class::DAY, 1)
 				expect(solution.part2(example_input_part_two)).to eq(2858)
 			end
 		end
 
 		context "with actual input" do
 			it "returns the correct answer" do
-				skip("TODO")
 				part2_answer = AOCClient.fetch_answer(described_class::YEAR, described_class::DAY, 2)
 				expect(solution.part2(actual_input)).to eq(part2_answer)
 			end
