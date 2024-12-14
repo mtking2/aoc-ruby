@@ -56,7 +56,6 @@ module Solutions
 					end
 				end
 
-				puts "start: #{trail_head} score: #{score} rating: #{rating}"
 				{ score: score, rating: rating }
 			end
 
