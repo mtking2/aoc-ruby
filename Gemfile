@@ -20,3 +20,4 @@ group :development do
 end
 
 gem "rake"
+gem "matrix"
