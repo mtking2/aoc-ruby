@@ -4,8 +4,8 @@
 
 ## Setup
 
-* fork/clone this repository
-* run `bundle install`
+* click `Use this template` --> `Create a new repository`
+* clone and run `bundle install`
 * login to [adventofcode.com](https://adventofcode.com) and get your session cookie
     * _you can get your session cookie from the Application/Storage tab your browser's developer tools_
 * run `cp .env.example .env`
