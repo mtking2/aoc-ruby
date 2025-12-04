@@ -152,8 +152,8 @@ module Solutions
 					row.each_with_index do |char, j|
 						if char == "A"
 
-							space_north_south = i >= 1 && i <= num_rows - 2
-							space_east_west = j >= 1 && j <= num_cols - 2
+							space_north_south = i.between?(1, num_rows - 2)
+							space_east_west = j.between?(1, num_cols - 2)
 
 							if space_north_south && space_east_west
 								nw = word_search[i - 1][j - 1]
