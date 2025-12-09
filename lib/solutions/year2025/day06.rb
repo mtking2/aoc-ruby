@@ -10,7 +10,7 @@ module Solutions
 			DAY = 6
 
 			def part1(input)
-				rows, ops = parse_input(input)
+				rows, ops = parse_input_part1(input)
 				# puts rows.inspect
 				# puts ops.inspect
 				# puts
@@ -22,18 +22,39 @@ module Solutions
 						totals[j] = totals[j].send(ops[j], value)
 						# puts "totals: #{totals.inspect}"
 					end
-					puts
 				end
 				totals.sum
 			end
 
 			def part2(input)
-				# Your code here
+				rows, ops = parse_input_part2(input)
+
+				grand_total = 0
+				op_counter = 0
+				problem_vals = []
+
+				rows.reverse_each.with_index do |row, i|
+					value = row.join.strip
+					if value.empty? || i == rows.length - 1
+						problem_vals << value.to_i if i == rows.length - 1
+						total = problem_vals.reduce(ops[op_counter % ops.length])
+						grand_total += total
+
+						# puts "problem_vals: #{problem_vals.inspect}, op: #{ops[op_counter % ops.length]}, total: #{total}, grand_total: #{grand_total}"
+						op_counter += 1
+						problem_vals = []
+					else
+						problem_vals << value.to_i
+					end
+				end
+				# puts rows.reverse.map { |row| row.join.strip }.inspect
+				# puts ops.inspect
+				grand_total
 			end
 
 			private
 
-			def parse_input(input)
+			def parse_input_part1(input)
 				# Process the input and return the result
 				lines = input.split("\n")
 				ops = lines.pop.split(/\s+/).reject(&:empty?)
@@ -43,6 +64,18 @@ module Solutions
 				[
 					lines,
 					ops
+				]
+			end
+
+			def parse_input_part2(input)
+				# Process the input and return the result
+				lines = input.split("\n")
+				ops = lines.pop.split(/\s+/).reject(&:empty?)
+
+				lines.map! { |line| line.chars }
+				[
+					lines.transpose,
+					ops.reverse
 				]
 			end
 

@@ -35,15 +35,13 @@ RSpec.describe Solutions::Year2025::Day06 do
 	describe "#part2" do
 		context "with example input" do
 			it "returns the expected result" do
-				skip("TODO")
 				example_input_part_two = AOCClient.fetch_example(described_class::YEAR, described_class::DAY, 2)
-				expect(solution.part2(example_input_part_two)).to eq("TODO")
+				expect(solution.part2(example_input_part_two)).to eq(3263827)
 			end
 		end
 
 		context "with actual input" do
 			it "returns the correct answer" do
-				skip("TODO")
 				part2_answer = AOCClient.fetch_answer(described_class::YEAR, described_class::DAY, 2)
 				expect(solution.part2(actual_input)).to eq(part2_answer)
 			end
