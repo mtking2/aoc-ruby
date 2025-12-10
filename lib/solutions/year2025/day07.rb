@@ -38,6 +38,7 @@ module Solutions
 				split_counter
 			end
 
+			# https://www.youtube.com/watch?v=JXUOMsFBDXQ
 			def propagate(grid, row, col, cache)
 				if row == grid.length - 1
 					return 1
@@ -61,14 +62,12 @@ module Solutions
 				result
 			end
 
-			# https://www.youtube.com/watch?v=JXUOMsFBDXQ
 			def part2(input)
 				grid = parse_input(input)
 
 				start_row = 0
 				start_col = grid.first.index("S")
-				cache = {}
-				propagate(grid, start_row, start_col, cache)
+				propagate(grid, start_row, start_col, {})
 			end
 
 			private
